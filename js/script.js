@@ -2,11 +2,6 @@
 let humanScore = 0 
 let computerScore = 0
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection)
-
 
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3)
@@ -47,5 +42,13 @@ function playRound(humanChoice, computerChoice) {
         computerChoice = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
         console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
         humanScore++;
+    }
+}
+
+function playGame() {
+    for (let i = 1; i <= 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
     }
 }
