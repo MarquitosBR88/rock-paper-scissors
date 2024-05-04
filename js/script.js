@@ -3,6 +3,23 @@ let humanScore = 0
 let computerScore = 0
 
 
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
+
+rock.addEventListener("click", () => {
+    playRound("rock", getComputerChoice())
+});
+
+paper.addEventListener("click", () => {
+    playRound("paper", getComputerChoice())
+});
+
+scissors.addEventListener("click", () => {
+    playRound("scissors", getComputerChoice())
+});
+
+
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3)
     if (computerChoice === 0) {
@@ -46,9 +63,10 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function playGame() {
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; ; i++) {
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
     }
 }
+
