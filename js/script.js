@@ -6,6 +6,9 @@ let computerScore = 0
 const rock = document.querySelector(".rock");
 const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
+const results = document.querySelector(".results");
+const score = document.querySelector(".score");
+const winner = document.querySelector(".winner");
 
 rock.addEventListener("click", () => {
     playRound("rock", getComputerChoice())
@@ -47,26 +50,35 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+    winner.textContent = "";
+
     if ((humanChoice === "rock" && computerChoice === "rock") || (humanChoice === "paper" && computerChoice === "paper") || (humanChoice === "scissors" && computerChoice === "scissors")) {
-        console.log("Draw, both chose the same option.");
+        results.textContent = "Draw, both chose the same option.";
+        score.textContent = `You: ${humanScore} Computer: ${computerScore}`;
     } else if ((humanChoice === "rock" && computerChoice === "paper") || (humanChoice === "paper" && computerChoice === "scissors") || (humanChoice === "scissors" && computerChoice === "rock")) {
         humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1);
         computerChoice = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+        results.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
         computerScore++;
+        score.textContent = `You: ${humanScore} Computer: ${computerScore}`;
     } else {
         humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1);
         computerChoice = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+        results.textContent =`You win! ${humanChoice} beats ${computerChoice}.`;
         humanScore++;
+        score.textContent = `You: ${humanScore} Computer: ${computerScore}`;
+    }
+    
+    
+    if (humanScore === 5) {
+        winner.textContent = "You win the game!";
+        computerScore = 0;
+        humanScore = 0;
+    } else if (computerScore === 5) {
+        winner.textContent = "You lost the game!";
+        computerScore = 0;
+        humanScore = 0;
     }
 }
 
-function playGame() {
-    for (let i = 1; ; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }
-}
 
